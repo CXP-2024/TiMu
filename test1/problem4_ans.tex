@@ -1,0 +1,75 @@
+\section{地脉热管（50pts）}
+近日，Teyvat地脉深处发生了一系列紊乱，导致地脉热管的异常升温。这些热管是连接地脉与地表的重要通道，它们的温度升高可能会引发一系列地质灾害。地脉流动着许多的熔岩物质，这些熔岩的密度为\(\rho(\vec{r,t})\)，比热容为\(c\)，流速为\(\vec{v}(r,t)\)，流动的熔岩在地脉中具有许许多多的热量交换。已知傅里叶定律为：\(\vec{j}_c = -k \nabla T\)。为单位时间单位面积内传导的热量，\(k\)为导热系数，为常数。下面你均只需要考虑热传导和热对流，不考虑其他因素的影响。
+\begin{enumerate}
+	\item 已知地脉中的温度分布为\(T(\vec{r,t})\)，请你推导出地脉中熔岩的热量流动方程(5pts)
+	\item 现在考虑连接地脉与地表的热管，为简单起见，我们将热管视为一个圆柱体，半径为\(R\)，长度为\(L\)，底面与地脉的接触面积为\(S\)，热管底部与顶部的温度分别为\(T_1\), \(T_2\)，假设热管熔岩中的温度分布已经达到了稳态，并假设热管中的熔岩流速为常数向上的\(v\)，并设热管具有散热功能，单位时间单位面积散热量为\(\alpha T\)，请你推导出热管中熔岩的温度分布\(T(x)\),\(x\)为沿着热管的轴向坐标,从下至上为\(0\)到\(L\)。(30pts)
+	\item 并求出该热管的总散热量\(Q_c\)。(10pts)
+	\item 现在考虑一个二维的流动着的稳态柱对称的熔岩，其流速径向向外流动\(v(r)\),设原点有源源不断的熔岩流出，流量为\(Q\)，请你推导出熔岩的温度分布\(T(r)\)满足的微分方程。(5pts)
+\end{enumerate}
+
+\section*{Answer 4}
+\begin{enumerate}
+	\item 空间中的热流为：
+	\begin{align*}
+		\vec{j} = \vec{j}_c + \vec{j}_d = -k \nabla T + \rho c T\vec{v} 
+	\end{align*}
+	做一个高斯面积分，得到：
+	\begin{align*}
+		\frac{\partial}{\partial t} \int_V \rho c T dV + \int_S \vec{j} \cdot dS = 0
+	\end{align*}
+		根据高斯定理，有：
+	\begin{align*}
+		\int_S \vec{j} \cdot dS = \int_V \nabla \cdot \vec{j} dV
+	\end{align*}
+		因此有：
+	\begin{align*}
+		\frac{\partial (\rho c T)}{\partial t} = k \nabla^2 T -  \nabla \cdot(\rho c T\vec{v})
+	\end{align*}
+		
+	\item 设热管中熔岩的温度分布为\(T(x)\)，则根据稳态条件，有：
+	\begin{align*}
+		j(x) &= -k \frac{\partial T}{\partial x} + \rho c v T(x) \\
+		j'(x)S &= -2\pi R \alpha T(x) 
+	\end{align*}
+	整理得到微分方程为：
+	\begin{align*}
+		-kS T''(x) + \rho cS v T'(x) = -2\pi R \alpha T(x)
+	\end{align*}
+	两个特征根为：
+	\begin{align*}
+		\lambda_{1,2} &= \frac{\rho c v}{2k} \pm \sqrt{(\frac{\rho c v}{2k})^2 + \frac{2\pi R \alpha}{kS}}
+	\end{align*}
+		因此通解为：
+	\begin{align*}
+		T(x) &= A e^{\lambda_1 x} + B e^{\lambda_2 x} \\
+		j(x) &= -k \frac{\partial T}{\partial x} + \rho c v T(x)
+	\end{align*}
+	带入边界条件：
+	\begin{align*}
+		T(0) &= T_1 \\
+		T(L) &= T_2
+	\end{align*}
+		得到：
+	\begin{align*}
+		A &= \frac{T_2 - T_1 e^{\lambda_2 L}}{e^{\lambda_1 L} - e^{\lambda_2 L}} \\
+		B &= \frac{T_1 e^{\lambda_1 L} - T_2 }{e^{\lambda_1 L} - e^{\lambda_2 L}}
+	\end{align*}
+		热管的总散热量为：
+	\begin{align*}
+		Q_c &= j(0)S-j(L)S \\
+		&= [-kS \frac{\partial T(x)}{\partial x} + \rho c Sv T(x)]_{0}^L \\
+		&= AS(e^{\lambda_1 L} - 1)(-k\lambda_1+c\rho v) + BS(e^{\lambda_2 L} - 1)(-k\lambda_2+c\rho v) 
+	\end{align*}
+	\item 先求流速的表达式：
+	\begin{align*}
+		Q &= 2\pi R v(r) \\
+		v(r) &= \frac{Q}{2\pi r}
+	\end{align*}
+	带入（1）的方程，得到：
+	\begin{align*}
+		 k T''(r) -  \frac{Q\rho c}{2\pi } \frac{d}{d r} (\frac{T(r)}{r})=0\\
+	\end{align*}
+
+
+
+\end{enumerate}
